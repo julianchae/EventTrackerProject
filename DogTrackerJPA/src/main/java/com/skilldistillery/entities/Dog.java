@@ -16,13 +16,15 @@ public class Dog {
 	
 	String name;
 	
+	String sex;
+	
 	String breed;
 	
 	String color;
 	
-	int age;
+	Integer age;
 	
-	double weight;
+	Integer weight;
 	
 	@Column(name = "is_fixed")
 	boolean isFixed;
@@ -37,7 +39,7 @@ public class Dog {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -47,6 +49,14 @@ public class Dog {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	public String getBreed() {
@@ -69,15 +79,15 @@ public class Dog {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 
-	public double getWeight() {
+	public Integer getWeight() {
 		return weight;
 	}
 
-	public void setWeight(double weight) {
+	public void setWeight(Integer weight) {
 		this.weight = weight;
 	}
 

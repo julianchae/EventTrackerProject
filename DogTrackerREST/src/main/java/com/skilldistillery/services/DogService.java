@@ -18,4 +18,8 @@ public interface DogService {
 	boolean deleteDog(int id);
 	
 	Dog updateDog(int id, Dog dog);
+
+	List<Dog> findDogsByKeyword(String keyword);
+	
+	List<Dog> findDogsByWeight(Integer min, Integer max);
 }
