@@ -32,6 +32,7 @@ public class DogController {
 	public List<Dog> index() {
 		return serve.index();
 	}
+
 	@GetMapping("dogs/{id}")
 	public Dog findById(@PathVariable int id, HttpServletResponse resp) {
 		Dog dog = null;
@@ -45,7 +46,7 @@ public class DogController {
 
 	@PostMapping("dogs")
 	public Dog createDog(@RequestBody Dog dog, HttpServletResponse resp, HttpServletRequest req) {
-	
+
 		dog = serve.createDog(dog);
 
 		if (dog == null) {
@@ -63,7 +64,11 @@ public class DogController {
 	@DeleteMapping("dogs/{id}")
 	public void deleteDog(@PathVariable int id, HttpServletResponse resp) {
 
-		serve.deleteDog(id);
+		boolean deleted = serve.deleteDog(id);
+
+		if (!deleted) {
+			resp.setStatus(404);
+		}
 
 	}
 
@@ -82,6 +87,7 @@ public class DogController {
 		}
 		return dog;
 	}
+
 	@GetMapping("dogs/search/{keyword}")
 	public List<Dog> findDogByKeyword(@PathVariable String keyword, HttpServletResponse resp) {
 		List<Dog> dogs = null;
@@ -91,9 +97,9 @@ public class DogController {
 		}
 		return dogs;
 	}
+
 	@GetMapping("dogs/weightSearch/{size}")
-	public List<Dog> findDogBySize(@PathVariable String size,
-			HttpServletResponse resp) {
+	public List<Dog> findDogBySize(@PathVariable String size, HttpServletResponse resp) {
 		List<Dog> dogs = null;
 		if (size.equals("small")) {
 			return serve.findDogsByWeight(1, 10);
@@ -101,7 +107,7 @@ public class DogController {
 			return serve.findDogsByWeight(10, 50);
 		} else if (size.equals("large")) {
 			return serve.findDogsByWeight(50, 200);
-		
+
 		}
 		return dogs;
 	}

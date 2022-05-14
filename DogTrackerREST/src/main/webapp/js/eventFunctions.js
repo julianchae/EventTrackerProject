@@ -35,6 +35,48 @@ function init() {
 		deleteById(id);
 		
 	} )
+	//update by id
+	document.dogUpdateForm.submit.addEventListener('click', updateDog);
+	
+	
+	
+}
+
+// update dog ***************
+function updateDog(e){
+	e.preventDefault();
+	let dog = {
+		name: document.dogUpdateForm.name.value,
+		breed: document.dogUpdateForm.breed.value,
+		age: document.dogUpdateForm.age.value,
+		sex: document.dogUpdateForm.sex.value,
+		weight: document.dogUpdateForm.weight.value,
+		color: document.dogUpdateForm.color.value,
+		fixed: document.dogUpdateForm.fixed.value,
+		imageUrl: document.dogUpdateForm.image.value
+	};
+	console.log(dog)
+	let xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'api/dogs/'+document.dogUpdateForm.id.value, true);
+
+	xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON request body
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			if (xhr.status == 200 || xhr.status == 201) { // Ok or Created
+				let data = JSON.parse(xhr.responseText);
+				console.log(data);
+				displayDog(data);
+			}
+			else {
+				console.error("POST request failed.");
+				console.error(xhr.status + ': ' + xhr.responseText);
+			}
+		}
+	};
+	xhr.send(JSON.stringify(dog));
+	
+	
 	
 	
 }
@@ -221,9 +263,25 @@ function findByKeyword(keyword){
 
 //delete id
 function deleteById(id){
-	
-	
-	
+		let xhr = new XMLHttpRequest();
+		xhr.open('DELETE', 'api/dogs/' + id)
+		xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			if (xhr.status === 200) {
+					let dataDiv = document.getElementById('dogData');
+					dataDiv.textContent = 'Dog was deleted';
+				
+			} else {
+				console.log("Dogs Not Found")
+				let dataDiv = document.getElementById('dogData');
+				dataDiv.textContent = '';
+				let notFoundDiv = document.createElement('div');
+				notFoundDiv.textContent = "Dogs not found. . ."
+				dataDiv.appendChild(notFoundDiv);
+			}
+		};
+	}
+	xhr.send();
 }
 
 	

@@ -4,24 +4,46 @@
     <meta charset="utf-8">
     <title>DogTracker</title>
      <script src="js/eventFunctions.js" charset="utf-8"></script>
+     
+    
   </head>
   <body>
    
   
    <h1>Welcome to Kennel</h1>
-   
+    <h3>Find Dog by ID</h3>
    <form name="dogById">
     <input type="text" name="dogId">
     <button name="lookup">Find a dog by Id</button>
   </form>
-  
+  <h3>List All Dogs</h3>
   <form name="findAll">
     <button name="findAll">List All Dogs</button>
   </form>
-  
+  <h3>Find Dog By Keyword</h3>
    <form name="dogByKeyword">
     <input type="text" name="keyword">
     <button name="findByKeyword">Find a dog by keyword</button>
+  </form>
+  <h3>Update Dog Information</h3>
+    <form name="dogUpdateForm">
+   ID:  <input type="text" name="id"> <br>
+   Name:  <input type="text" name="name"><br>
+   Breed:  <input type="text" name="breed"><br>
+   Age:  <input type="text" name="age"><br>
+   Sex:  <input type="text" name="sex"><br>
+   Weight:  <input type="text" name="weight"><br>
+   Image:  <input type="text" name="image"><br>
+   Color: <input type="text" name="color"><br>
+   Fixed:
+   <input type="radio" id="fixed" name="fixed" value="true" checked>
+<label for="fixed">Fixed</label>
+
+<input type="radio" id="notFixed" name="fixed" value="false">
+<label for="notFixed">Not Fixed</label><br>
+   
+    <button name="submit">Update Dog</button>
+    
   </form>
   
   <form name="deleteById">
@@ -35,17 +57,18 @@
     <div id="allDogs"></div>
   </div>
    
+   <h3>Intake Form</h3>
     <form name="dogIntakeForm">
-   Name:  <input type="text" name="name">
-   Breed:  <input type="text" name="breed">
-   Age:  <input type="text" name="age">
-   Sex:  <input type="text" name="sex">
-   Weight:  <input type="text" name="weight">
-   Image:  <input type="text" name="image">
-   Color: <input type="text" name="color">
+   Name:  <input type="text" name="name"><br>
+   Breed:  <input type="text" name="breed"><br>
+   Age:  <input type="text" name="age"><br>
+   Sex:  <input type="text" name="sex"><br>
+   Weight:  <input type="text" name="weight"><br>
+   Image:  <input type="text" name="image"><br>
+   Color: <input type="text" name="color"><br>
    Fixed:
    <input type="radio" id="fixed" name="fixed" value="true" checked>
-<label for="fixed">Fixed</label><br>
+<label for="fixed">Fixed</label>
 
 <input type="radio" id="notFixed" name="fixed" value="false">
 <label for="notFixed">Not Fixed</label><br>
