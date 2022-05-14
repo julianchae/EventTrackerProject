@@ -23,6 +23,13 @@ DROP TABLE IF EXISTS `dog` ;
 CREATE TABLE IF NOT EXISTS `dog` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(500) NOT NULL,
+  `breed` VARCHAR(500) NOT NULL,
+  `color` VARCHAR(100) NOT NULL,
+  `age` INT NOT NULL,
+  `weight` INT NOT NULL,
+  `is_fixed` TINYINT NOT NULL,
+  `image_url` VARCHAR(2000) NULL,
+  `sex` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -42,7 +49,14 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogtrackerDB`;
-INSERT INTO `dog` (`id`, `name`) VALUES (1, 'Kevin');
+INSERT INTO `dog` (`id`, `name`, `breed`, `color`, `age`, `weight`, `is_fixed`, `image_url`, `sex`) VALUES (1, 'Kevin', 'Golden Retriever', 'Golden', 3, 85, 1, NULL, 'Male');
+INSERT INTO `dog` (`id`, `name`, `breed`, `color`, `age`, `weight`, `is_fixed`, `image_url`, `sex`) VALUES (DEFAULT, 'Charlie', 'Golden Retriever', 'Golden', 5, 70, 1, NULL, 'Male');
+INSERT INTO `dog` (`id`, `name`, `breed`, `color`, `age`, `weight`, `is_fixed`, `image_url`, `sex`) VALUES (DEFAULT, 'James', 'Pit Bull', 'White', 4, 75, 1, NULL, 'Male');
+INSERT INTO `dog` (`id`, `name`, `breed`, `color`, `age`, `weight`, `is_fixed`, `image_url`, `sex`) VALUES (DEFAULT, 'Karen', 'chihuahua', 'Beige', 12, 4, 1, NULL, 'Female');
+INSERT INTO `dog` (`id`, `name`, `breed`, `color`, `age`, `weight`, `is_fixed`, `image_url`, `sex`) VALUES (DEFAULT, 'John', 'English Mastiff ', 'Tan', 3, 124, 0, NULL, 'Male');
+INSERT INTO `dog` (`id`, `name`, `breed`, `color`, `age`, `weight`, `is_fixed`, `image_url`, `sex`) VALUES (DEFAULT, 'Katie', 'Golden Retriever', 'White', 4, 60, 1, NULL, 'Famale');
+INSERT INTO `dog` (`id`, `name`, `breed`, `color`, `age`, `weight`, `is_fixed`, `image_url`, `sex`) VALUES (DEFAULT, 'Jasmine', 'German Shepard', 'Tan and Black', 3, 85, 1, NULL, 'Female');
+INSERT INTO `dog` (`id`, `name`, `breed`, `color`, `age`, `weight`, `is_fixed`, `image_url`, `sex`) VALUES (DEFAULT, 'Frank', 'German Short Haired Pointer', 'Brown', 7, 56, 0, NULL, 'Male');
 
 COMMIT;
 

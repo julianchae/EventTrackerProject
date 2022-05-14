@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DogTracker</title>
+     <script src="js/eventFunctions.js" charset="utf-8"></script>
+  </head>
+  <body>
+   
+  
+   <h1>Welcome to Kennel</h1>
+   
+   <form name="dogById">
+    <input type="text" name="dogId">
+    <button name="lookup">Find a dog by Id</button>
+  </form>
+  
+  <form name="findAll">
+    <button name="findAll">List All Dogs</button>
+  </form>
+  
+   <form name="dogByKeyword">
+    <input type="text" name="keyword">
+    <button name="findByKeyword">Find a dog by keyword</button>
+  </form>
+  
+  <form name="deleteById">
+    <input type="text" name="id">
+    <button name="delete">Delete by ID</button>
+  </form>
+
+  
+   <div id="output">
+    <div id="dogData"></div>
+    <div id="allDogs"></div>
+  </div>
+   
+    <form name="dogIntakeForm">
+   Name:  <input type="text" name="name">
+   Breed:  <input type="text" name="breed">
+   Age:  <input type="text" name="age">
+   Sex:  <input type="text" name="sex">
+   Weight:  <input type="text" name="weight">
+   Image:  <input type="text" name="image">
+   Color: <input type="text" name="color">
+   Fixed:
+   <input type="radio" id="fixed" name="fixed" value="true" checked>
+<label for="fixed">Fixed</label><br>
+
+<input type="radio" id="notFixed" name="fixed" value="false">
+<label for="notFixed">Not Fixed</label><br>
+   
+    <button name="submit">Intake Dog</button>
+    
+  </form>
+  
+  
+  
+  
+  
+   
+  </body>
+</html>
