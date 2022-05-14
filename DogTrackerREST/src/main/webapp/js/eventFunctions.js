@@ -223,7 +223,6 @@ function findByKeyword(keyword){
 function deleteById(id){
 	
 	
-	console.log("Delete hit")
 	
 }
 
