@@ -5,25 +5,33 @@ window.addEventListener('load', function(e) {
 
 //event listener calls
 function init() {
+	
 	//find by id
 	document.dogById.lookup.addEventListener('click', function(event) {
+		let dataDiv = document.getElementById('dogData');
+		dataDiv.textContent = '';
 		event.preventDefault();
 		let dogId = document.dogById.dogId.value;
 		if (!isNaN(dogId) && dogId > 0) {
 			findDogById(dogId);
+		}else{
+			dataDiv.textContent = 'Dogs not found . . .'
 		}
+		
 	})
 	//intake dog form 
 	document.dogIntakeForm.submit.addEventListener('click', intakeDog);
 	//index dog form
 	document.findAll.findAll.addEventListener('click', (e) => {
-		
+		let dataDiv = document.getElementById('dogData');
+		dataDiv.textContent = '';
 		e.preventDefault();
 		findAllDogs();
 	});
 	//find by keyword
 	document.dogByKeyword.findByKeyword.addEventListener('click', (e) => {
-		
+		let dataDiv = document.getElementById('dogData');
+		dataDiv.textContent = '';
 		e.preventDefault();
 		let keyword = document.dogByKeyword.keyword.value;
 		findByKeyword(keyword);
@@ -38,9 +46,48 @@ function init() {
 	//update by id
 	document.dogUpdateForm.submit.addEventListener('click', updateDog);
 	
+	//pounds
+	document.pounds.findPounds.addEventListener('click',(e)=>{
+		e.preventDefault();
+		let div =  document.getElementById('pounds');
+		div.textContent = '';
+		findDogFood();
+	} );
 	
 	
-}
+	//toggle hide/show for update form
+	
+	let btn = document.getElementById("showHide")
+	let form = document.getElementById('updateForm');
+	form.style.display = 'none';
+	
+	btn.addEventListener('click', (e)=>{
+		e.preventDefault();
+		
+		if(form.style.display==='none'){
+			form.style.display = 'block';
+		}else {
+			form.style.display = 'none'
+		}
+		
+	});
+
+//toggle hide/show for intake form
+
+let form2 = document.getElementById('intakeForm');
+form2.style.display='none'
+let btn2 = document.getElementById("showHide2")
+	btn2.addEventListener('click', (e)=>{
+		e.preventDefault();
+		
+		if(form2.style.display==='none'){
+			form2.style.display = 'block';
+		}else {
+			form2.style.display = 'none'
+		}
+	});
+
+
 
 // update dog ***************
 function updateDog(e){
@@ -75,9 +122,6 @@ function updateDog(e){
 		}
 	};
 	xhr.send(JSON.stringify(dog));
-	
-	
-	
 	
 }
 //create dog ***************
@@ -137,10 +181,7 @@ function findDogById(dogId) {
 	xhr.send();
 }
 function displayDog(dog) {
-	let allDogs = document.getElementById('allDogs');
-	allDogs.textContent = '';
 	let dataDiv = document.getElementById('dogData');
-	dataDiv.textContent = '';
 	let h1 = document.createElement('h1');
 	h1.textContent = dog.name;
 	dataDiv.appendChild(h1);
@@ -153,6 +194,9 @@ function displayDog(dog) {
 	let color = document.createElement('li')
 	let fixed = document.createElement('li')
 	let weight = document.createElement('li')
+	let id = document.createElement('li')
+	
+	id.textContent = "Kennel ID: "+dog.id;
 	ul.textContent = 'dog info';
 	age.textContent = "Age: "+dog.age;
 	breed.textContent ="Breed: " +dog.breed;
@@ -165,7 +209,7 @@ function displayDog(dog) {
 	}else{
 		fixed.textContent = "Not fixed"
 	}
-	
+	dataDiv.appendChild(id);
 	dataDiv.appendChild(age);
 	dataDiv.appendChild(breed);
 	dataDiv.appendChild(sex);
@@ -198,45 +242,17 @@ function findAllDogs(){
 function displayAllDogs(dogs){
 	let dataDiv = document.getElementById('dogData');
 	dataDiv.textContent = '';
-	let allDogs = document.getElementById('allDogs');
-	allDogs.textContent = '';
 	if(dogs.length>0){
 	let h1 = document.createElement('h1');
 	h1.textContent = "Dogs"
-	allDogs.appendChild(h1);
 	for(let dog of dogs){
-	let age = document.createElement('li')
-	let breed = document.createElement('li')
-	let sex = document.createElement('li')
-	let color = document.createElement('li')
-	let fixed = document.createElement('li')
-	let weight = document.createElement('li')
-	let name = document.createElement('h3')
-	name.textContent = dog.name;
-	age.textContent ="Age: "+dog.age;
-	breed.textContent = "Breed: "+dog.breed;
-	sex.textContent = "Sex: "+dog.sex;
-	color.textContent = "Color: "+dog.color;
-	weight.textContent = "Weight: "+dog.weight;
-	if(dog.fixed)
-{fixed.textContent = "fixed";
-}
-else{
-	fixed.textContent = "not fixed"
-}
-	allDogs.appendChild(name);
-	allDogs.appendChild(age);
-	allDogs.appendChild(breed);
-	allDogs.appendChild(sex);
-	allDogs.appendChild(weight);
-	allDogs.appendChild(color);
-	allDogs.appendChild(fixed);}
+	displayDog(dog);}
 	}
 	else{
 		dataDiv.textContent = '';
 		let h1 = document.createElement('div');
 	h1.textContent = "Dogs not found . . .";
-	allDogs.appendChild(h1);
+	dataDiv.appendChild(h1);
 	}
 }
 //find by keyword
@@ -260,7 +276,6 @@ function findByKeyword(keyword){
 	}
 	xhr.send();
 }
-
 //delete id
 function deleteById(id){
 		let xhr = new XMLHttpRequest();
@@ -283,14 +298,42 @@ function deleteById(id){
 	}
 	xhr.send();
 }
+function findDogFood(){
+	console.log("food function hit")
+	let xhr = new XMLHttpRequest();
+	xhr.open('GET', 'api/index')
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			if (xhr.status === 200) {
+				let dogs = JSON.parse(xhr.responseText);
+				let numDogs = dogs.length;
+				let showPounds = document.getElementById('pounds');
+				let h1 = document.createElement('h3');
+				let poundsWeekly = (numDogs*4)*7;
+				h1.textContent = "Our dogs consume: "+ poundsWeekly+" pounds weekly! ";
+				showPounds.appendChild(h1)
+				
+			} else {
+				console.log("Dogs Not Found")
+				let dataDiv = document.getElementById('dogData');
+				dataDiv.textContent = '';
+				let notFoundDiv = document.createElement('div');
+				notFoundDiv.textContent = "Dogs not found. . ."
+				dataDiv.appendChild(notFoundDiv);
+			}
+		};
+	}
+	xhr.send();
+
+
 
 	
 	
 	
 	
+}
 
 
 
 
-
-
+}
