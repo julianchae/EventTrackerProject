@@ -309,10 +309,10 @@ function findDogFood(){
 				let dogs = JSON.parse(xhr.responseText);
 				let numDogs = dogs.length;
 				let showPounds = document.getElementById('pounds');
-				let h1 = document.createElement('h3');
+				let h3 = document.createElement('h3');
 				let poundsWeekly = (numDogs*4)*7;
-				h1.textContent = "Our dogs consume: "+ poundsWeekly+" pounds weekly! ";
-				showPounds.appendChild(h1)
+				h3.textContent = "Our dogs consume: "+ poundsWeekly+" pounds weekly! ";
+				showPounds.appendChild(h3)
 				
 			} else {
 				console.log("Dogs Not Found")
