@@ -298,6 +298,7 @@ function deleteById(id){
 	}
 	xhr.send();
 }
+
 function findDogFood(){
 	console.log("food function hit")
 	let xhr = new XMLHttpRequest();
