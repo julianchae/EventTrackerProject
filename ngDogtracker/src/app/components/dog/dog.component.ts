@@ -12,6 +12,8 @@ export class DogComponent implements OnInit {
 
  dogs: Dog[] = [];
 
+ addDogBoolean: boolean = false;
+
  selected: Dog | null = null;
 
  intakeDog : Dog = new Dog();
@@ -33,6 +35,14 @@ export class DogComponent implements OnInit {
     this.loadDogs()
   }
 
+  doesDogHaveImage(image:string){
+    if(image){
+      return image;
+    }else{
+      return "https://previews.123rf.com/images/siridhata/siridhata1702/siridhata170200078/71854477-cartoon-dog-vector-illustration.jpg"
+    }
+
+  }
 
   loadDogs(){
     this.dogServe.index().subscribe(
@@ -67,6 +77,13 @@ this.loadDogs();
   }
 
 )
+
+  }
+
+  displayIntake(){
+    this.addDogBoolean =!this.addDogBoolean;
+
+
   }
 
   displayDogs() {
@@ -77,6 +94,7 @@ this.loadDogs();
 
   deleteDog(id: number){
   this.dogServe.delete(id).subscribe((success)=>{
+  this.selected = null;
     this.loadDogs();
 
   });

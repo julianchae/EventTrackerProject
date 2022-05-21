@@ -1,86 +1,111 @@
-<h1>Welcome to Kennel</h1>
 
-<div class="container">
-  <h3 class="mb-2">Meet our Dogs</h3>
+<div class="container" *ngIf="!selected">
+  <h3 class="mb-2">SkillDistllery Kennel</h3>
 
   <div class="section-intro mb-3">It’s important to get to know your pup care provider,
     as you are trusting us with a furry member of your family.
-    With Skill Distillery Kennel®, you can rest assured your dog is in the best,
+    With SkillDistillery Kennel®, you can rest assured your dog is in the best,
     most qualified hands in the business. Since 2000,
     we have been providing fun and dependable dog care services parents and pups love.</div>
   <div class="integration-list row justify-content-center py-5">
 
-      <div class= "col-sm-3"><div class="item col-4 col-md-3 col-lg-2 mb-3 mb-lg-5 top-line-lg">
-        <a href="#"><img class="shadow rounded-circle"
-          src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a></div>
+      <div *ngFor="let dog of dogs" class= "col-sm-3"><div class="item col-4 col-md-3 col-lg-2 mb-3 mb-lg-5 top-line-lg">
+        <a (click)="displayDog(dog)"><img class="shadow rounded-circle"
+          [src]="doesDogHaveImage(dog.imageUrl)" alt="">
+
+        </a>
+        <p class="circle-image ">{{dog.name}}</p>
+
+
+</div>
+
     </div>
   </div>
   <!--//row-->
   <div class="pt-3 text-center">
-      <a class="btn btn-light" href="#">View More</a>
+      <a class="btn btn-light" (click)="displayIntake()" >Board Your Dog !</a>
   </div>
 </div>
-  <h3>List Of Dogs</h3>
-<table *ngIf="!selected" >
-  <thead>
-    <tr>
-      <th>Name</th>
-
-
-    </tr>
-  </thead>
-  <tbody *ngFor="let dog of dogs">
-  <td class = "dog" (click)="displayDog(dog)">{{dog.name}}</td>
-  <td><button (click)="deleteDog(dog.id)" class="btn btn-primary">Picked up</button></td>
-
-</tbody>
-</table>
 
 <div *ngIf="selected && !editDog">
-Name: {{selected.name}}<br>
-Age: {{selected.age}}<br>
-Sex: {{selected.sex}}<br>
-Breed: {{selected.breed}}<br>
-Weight: {{selected.weight}}<br>
-Image: <img src="{{selected.imageUrl}}" alt=""><br>
-<div *ngIf="selected.fixed">{{selected.name}} is fixed</div>
-<div *ngIf="!selected.fixed" > {{selected.name}} is not fixed</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
+            <div class="card border-0 shadow">
+                <img src={{selected.imageUrl}} alt="...">
+                <div class="card-body p-1-9 p-xl-5">
+                    <div class="mb-4">
+                        <h3 class="h4 mb-0">{{selected.name}}</h3>
+                        <span class="text-primary"> {{selected.breed}}  </span><br>
+                        <span class="text-primary"> Age: {{selected.age}}  </span><br>
+                        <span class="text-primary"> Sex: {{selected.sex}}  </span><br>
+                        <span class="text-primary"> Weight: {{selected.weight}}  </span><br>
+                        <span class="text-primary"*ngIf="selected.fixed">{{selected.name}} is fixed </span><br>
+                        <span class="text-primary" *ngIf="!selected.fixed">{{selected.name}} is not fixed </span>
+                        <button (click)="setEditDog()" class="btn btn-primary btn-sm m-1"> Edit </button>
+<button (click)="displayDogs()"class="btn btn-primary btn-sm m-1"> Back </button>
+<td><button (click)="deleteDog(selected.id)" class="btn btn-primary btn-sm m-1">Picked up</button></td>
+                    </div>
 
-
-
-<button (click)="setEditDog()" class="btn btn-primary"> Edit </button>
-<button (click)="displayDogs()"class="btn btn-primary"> Back </button>
-
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 
 
-	<form name="dogIntakeForm" id='intakeForm' *ngIf="!selected && !editDog ">
+
+
+
+
+
+</div>
+
+
+<div class="container">
+
+	<form name="dogIntakeForm" id='intakeForm' *ngIf="addDogBoolean && !selected" >
+    <div class="row" >
     <h3>Intake Form</h3>
 		<div class="mb-3">
+      <div class="col-6">
 			Name: <input type="text" name="name" [(ngModel)]="intakeDog.name" class="form-control"
-				style="max-width: 15vw">
-        <br>
-        Breed: <input type="text" name="breed" class="form-control" [(ngModel)]="intakeDog.breed" style="max-width: 15vw"><br>
-			Age: <input type="text" name="age" class="form-control"	[(ngModel)]="intakeDog.age" style="max-width: 15vw"><br>
-
-         Sex: <input type="text" [(ngModel)]="intakeDog.sex" 	name="sex" class="form-control" style="max-width: 15vw"><br>
-
-			Weight: <input type="text" [(ngModel)]="intakeDog.weight"  name="weight" class="form-control"	style="max-width: 15vw">
-      <br>
-        Image: <input type="text"	[(ngModel)]="intakeDog.imageUrl" 	name="image" class="form-control" style="max-width: 15vw"><br>
-			Color: <input type="text" [(ngModel)]="intakeDog.color"  name="color" class="form-control"	style="max-width: 15vw"><br>
-
+				style="max-width: 20vw">
+      </div>
+      <div class="col-6">
+       Breed: <input type="text" name="breed" class="form-control" [(ngModel)]="intakeDog.breed" style="max-width: 20vw">
+      </div>
+      <div class="col-6">
+			Age: <input type="text" name="age" class="form-control"	[(ngModel)]="intakeDog.age" style="max-width: 20vw">
+    </div>
+    <div class="col-6">
+         Sex: <input type="text" [(ngModel)]="intakeDog.sex" 	name="sex" class="form-control" style="max-width: 20vw">
+        </div>
+        <div class="col-6">
+			Weight: <input type="text" [(ngModel)]="intakeDog.weight"  name="weight" class="form-control"	style="max-width: 20vw">
+    </div>
+    <div class="col-6">
+        Image: <input type="text"	[(ngModel)]="intakeDog.imageUrl" 	name="image" class="form-control" style="max-width: 20vw">
+      </div>
+      <div class="col-6">
+			Color: <input type="text" [(ngModel)]="intakeDog.color"  name="color" class="form-control"	style="max-width: 20vw">
+    </div>
+    <div class="col-6">
       Fixed: <input type="radio" [(ngModel)]="intakeDog.fixed" id="fixed" name="fixed" value="true" checked> <label	for="fixed">
         Fixed</label> <input type="radio" id="notFixed"
-				name="fixed" value="false"> <label for="notFixed">Not	Fixed</label><br>
+				name="fixed" value="false"> <label for="notFixed">Not	Fixed</label>
+      </div>
 
-			<button name="submit" (click)="addDog(intakeDog)" class="btn btn-primary">Intake Dog</button>
+			<button name="submit" (click)="addDog(intakeDog)" class="btn btn-primary btn-sm m-1">Intake Dog</button>
 		</div>
+  </div>
 	</form>
 
-
+</div>
 
 
   <form name="dogUpdateForm" id='updateForm' *ngIf="editDog" >
@@ -104,9 +129,9 @@ Image: <img src="{{selected.imageUrl}}" alt=""><br>
         Fixed</label> <input type="radio" id="notFixed"
         name="fixed" value="false"> <label for="notFixed">Not	Fixed</label><br>
 
-      <button name="submit" (click)="updateDog(editDog)" class="btn btn-primary">Update Dog</button>
+      <button name="submit" (click)="updateDog(editDog)" class="btn btn-primary btn-sm m-1">Update Dog</button>
 
-      <button (click)="displayDogs()" class="btn btn-primary"> Back </button>
+      <button (click)="displayDogs()" class="btn btn-primary btn-sm m-1"> Back </button>
 
     </div>
   </form>
