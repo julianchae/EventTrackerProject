@@ -1,0 +1,113 @@
+<h1>Welcome to Kennel</h1>
+
+<div class="container">
+  <h3 class="mb-2">Meet our Dogs</h3>
+
+  <div class="section-intro mb-3">It’s important to get to know your pup care provider,
+    as you are trusting us with a furry member of your family.
+    With Skill Distillery Kennel®, you can rest assured your dog is in the best,
+    most qualified hands in the business. Since 2000,
+    we have been providing fun and dependable dog care services parents and pups love.</div>
+  <div class="integration-list row justify-content-center py-5">
+
+      <div class= "col-sm-3"><div class="item col-4 col-md-3 col-lg-2 mb-3 mb-lg-5 top-line-lg">
+        <a href="#"><img class="shadow rounded-circle"
+          src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a></div>
+    </div>
+  </div>
+  <!--//row-->
+  <div class="pt-3 text-center">
+      <a class="btn btn-light" href="#">View More</a>
+  </div>
+</div>
+  <h3>List Of Dogs</h3>
+<table *ngIf="!selected" >
+  <thead>
+    <tr>
+      <th>Name</th>
+
+
+    </tr>
+  </thead>
+  <tbody *ngFor="let dog of dogs">
+  <td class = "dog" (click)="displayDog(dog)">{{dog.name}}</td>
+  <td><button (click)="deleteDog(dog.id)" class="btn btn-primary">Picked up</button></td>
+
+</tbody>
+</table>
+
+<div *ngIf="selected && !editDog">
+Name: {{selected.name}}<br>
+Age: {{selected.age}}<br>
+Sex: {{selected.sex}}<br>
+Breed: {{selected.breed}}<br>
+Weight: {{selected.weight}}<br>
+Image: <img src="{{selected.imageUrl}}" alt=""><br>
+<div *ngIf="selected.fixed">{{selected.name}} is fixed</div>
+<div *ngIf="!selected.fixed" > {{selected.name}} is not fixed</div>
+
+
+
+<button (click)="setEditDog()" class="btn btn-primary"> Edit </button>
+<button (click)="displayDogs()"class="btn btn-primary"> Back </button>
+
+</div>
+
+
+
+
+	<form name="dogIntakeForm" id='intakeForm' *ngIf="!selected && !editDog ">
+    <h3>Intake Form</h3>
+		<div class="mb-3">
+			Name: <input type="text" name="name" [(ngModel)]="intakeDog.name" class="form-control"
+				style="max-width: 15vw">
+        <br>
+        Breed: <input type="text" name="breed" class="form-control" [(ngModel)]="intakeDog.breed" style="max-width: 15vw"><br>
+			Age: <input type="text" name="age" class="form-control"	[(ngModel)]="intakeDog.age" style="max-width: 15vw"><br>
+
+         Sex: <input type="text" [(ngModel)]="intakeDog.sex" 	name="sex" class="form-control" style="max-width: 15vw"><br>
+
+			Weight: <input type="text" [(ngModel)]="intakeDog.weight"  name="weight" class="form-control"	style="max-width: 15vw">
+      <br>
+        Image: <input type="text"	[(ngModel)]="intakeDog.imageUrl" 	name="image" class="form-control" style="max-width: 15vw"><br>
+			Color: <input type="text" [(ngModel)]="intakeDog.color"  name="color" class="form-control"	style="max-width: 15vw"><br>
+
+      Fixed: <input type="radio" [(ngModel)]="intakeDog.fixed" id="fixed" name="fixed" value="true" checked> <label	for="fixed">
+        Fixed</label> <input type="radio" id="notFixed"
+				name="fixed" value="false"> <label for="notFixed">Not	Fixed</label><br>
+
+			<button name="submit" (click)="addDog(intakeDog)" class="btn btn-primary">Intake Dog</button>
+		</div>
+	</form>
+
+
+
+
+  <form name="dogUpdateForm" id='updateForm' *ngIf="editDog" >
+    <div class="mb-3">
+      <h3 >Update Form</h3>
+
+      Name: <input type="text" name="name" [(ngModel)]="editDog.name" class="form-control"
+        style="max-width: 15vw">
+        <br>
+        Breed: <input type="text" name="breed" class="form-control" [(ngModel)]="editDog.breed" style="max-width: 15vw"><br>
+      Age: <input type="text" name="age" class="form-control"	[(ngModel)]="editDog.age" style="max-width: 15vw"><br>
+
+         Sex: <input type="text" [(ngModel)]="editDog.sex" 	name="sex" class="form-control" style="max-width: 15vw"><br>
+
+      Weight: <input type="text" [(ngModel)]="editDog.weight"  name="weight" class="form-control"	style="max-width: 15vw">
+      <br>
+        Image: <input type="text"	[(ngModel)]="editDog.imageUrl" 	name="image" class="form-control" style="max-width: 15vw"><br>
+      Color: <input type="text" [(ngModel)]="editDog.color"  name="color" class="form-control"	style="max-width: 15vw"><br>
+
+      Fixed: <input type="radio" [(ngModel)]="editDog.fixed" id="fixed" name="fixed" value="true" checked> <label	for="fixed">
+        Fixed</label> <input type="radio" id="notFixed"
+        name="fixed" value="false"> <label for="notFixed">Not	Fixed</label><br>
+
+      <button name="submit" (click)="updateDog(editDog)" class="btn btn-primary">Update Dog</button>
+
+      <button (click)="displayDogs()" class="btn btn-primary"> Back </button>
+
+    </div>
+  </form>
+
