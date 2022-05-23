@@ -10,13 +10,17 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DogComponent } from './components/dog/dog.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { NaviComponent } from './navi/navi.component';
+import { IntakeComponent } from './intake/intake.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DogComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    NaviComponent,
+    IntakeComponent
   ],
   imports: [
     BrowserModule,

@@ -6,8 +6,13 @@
     as you are trusting us with a furry member of your family.
     With SkillDistillery Kennel®, you can rest assured your dog is in the best,
     most qualified hands in the business. Since 2000,
-    we have been providing fun and dependable dog care services parents and pups love.</div>
+    we have been providing fun and dependable dog care services parents and pups love.
+    We currently have {{dogs.length}} dogs in our care!
+
+  </div>
+
   <div class="integration-list row justify-content-center py-5">
+
 
       <div *ngFor="let dog of dogs" class= "col-sm-3"><div class="item col-4 col-md-3 col-lg-2 mb-3 mb-lg-5 top-line-lg">
         <a (click)="displayDog(dog)"><img class="shadow rounded-circle"
@@ -42,10 +47,10 @@
                         <span class="text-primary"> Age: {{selected.age}}  </span><br>
                         <span class="text-primary"> Sex: {{selected.sex}}  </span><br>
                         <span class="text-primary"> Weight: {{selected.weight}}  </span><br>
-                        <span class="text-primary"*ngIf="selected.fixed">{{selected.name}} is fixed </span><br>
-                        <span class="text-primary" *ngIf="!selected.fixed">{{selected.name}} is not fixed </span>
+                        <span class="text-primary" *ngIf="selected.fixed">{{selected.name}} is fixed </span><br>
+                        <span class="text-primary" *ngIf="!selected.fixed">{{selected.name}} is not fixed </span><br>
                         <button (click)="setEditDog()" class="btn btn-primary btn-sm m-1"> Edit </button>
-<button (click)="displayDogs()"class="btn btn-primary btn-sm m-1"> Back </button>
+  <button (click)="displayDogs()"class="btn btn-primary btn-sm m-1"> Back </button>
 <td><button (click)="deleteDog(selected.id)" class="btn btn-primary btn-sm m-1">Picked up</button></td>
                     </div>
 
@@ -54,14 +59,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
 
 </div>
 
@@ -126,8 +123,7 @@
       Color: <input type="text" [(ngModel)]="editDog.color"  name="color" class="form-control"	style="max-width: 15vw"><br>
 
       Fixed: <input type="radio" [(ngModel)]="editDog.fixed" id="fixed" name="fixed" value="true" checked> <label	for="fixed">
-        Fixed</label> <input type="radio" id="notFixed"
-        name="fixed" value="false"> <label for="notFixed">Not	Fixed</label><br>
+        Fixed</label> <input type="radio" [(ngModel)]="editDog.fixed" name="fixed" value="false"> <label for="notFixed">Not	Fixed</label><br>
 
       <button name="submit" (click)="updateDog(editDog)" class="btn btn-primary btn-sm m-1">Update Dog</button>
 

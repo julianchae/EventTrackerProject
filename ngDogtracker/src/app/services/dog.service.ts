@@ -10,6 +10,7 @@ import { Dog } from '../model/dog';
 export class DogService {
   private url = environment.baseUrl+ 'api/dogs'
   private indexUrl = environment.baseUrl+ 'api/index'
+  private keywordUrl = environment.baseUrl+ ' api/dogs/search'
   constructor(
 private http: HttpClient
 
@@ -48,12 +49,17 @@ private http: HttpClient
 
   delete(id: number){
     return this.http.delete<void>(this.url +'/'+ id)
+  }
 
+  findByKeyword(keyword: string){
 
-
-
+  return this.http.get<Dog[]>(this.keywordUrl + '/'+keyword)
 
   }
+
+
+
+
   show(id:number){
     return this.http.get<Dog>(this.url + '/'+ id)
     .pipe(

@@ -24,6 +24,8 @@ export class DogComponent implements OnInit {
 
   editDog: Dog | null = null;
 
+  keyword: string ='';
+
 
   constructor(
     private dogServe : DogService,
@@ -43,6 +45,19 @@ export class DogComponent implements OnInit {
     }
 
   }
+
+findByKeyword(keyword: string){
+
+  this.dogServe.findByKeyword(keyword).subscribe(
+  (sucess)=>{
+    (this.dogs = sucess)
+    console.log(this.dogs)
+  },
+(err)=> console.log('Observe got an error'+err)
+
+  )
+}
+
 
   loadDogs(){
     this.dogServe.index().subscribe(
@@ -77,8 +92,8 @@ this.loadDogs();
   }
 
 )
-
   }
+
 
   displayIntake(){
     this.addDogBoolean =!this.addDogBoolean;
@@ -105,7 +120,7 @@ this.loadDogs();
   displayDog(dog: Dog){
 
     this.selected = dog;
-    console.log(dog.fixed)
+    console.log(this.selected)
 
 
 }
